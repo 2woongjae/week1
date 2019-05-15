@@ -5,7 +5,7 @@ function getToken() {
 function getUserByToken(token) {
   return new Promise(resolve => {
     axios
-      .get('https://api.ts-korea.org/v1/me', {
+      .get('https://api.marktube.tv/v1/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,7 +34,7 @@ function updateProfile() {
     }
     axios
       .patch(
-        `https://api.ts-korea.org/v1/me`,
+        `https://api.marktube.tv/v1/me`,
         {
           githubId,
           email,
@@ -74,7 +74,7 @@ function logout() {
     return;
   }
   axios
-    .delete('https://api.ts-korea.org/v1/me', {
+    .delete('https://api.marktube.tv/v1/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

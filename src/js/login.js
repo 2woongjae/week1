@@ -9,7 +9,7 @@ function getIsLogin() {
       return resolve(false);
     }
     axios
-      .get('https://api.ts-korea.org/v1/me', {
+      .get('https://api.marktube.tv/v1/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ function login() {
   const password = passwordElement.value;
 
   axios
-    .post('https://api.ts-korea.org/v1/me', {
+    .post('https://api.marktube.tv/v1/me', {
       githubId,
       password,
     })

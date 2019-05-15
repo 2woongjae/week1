@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "https://api.ts-korea.org/v1/me",
+			"name": "https://api.marktube.tv/v1/me",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -33,12 +33,12 @@
 					]
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/me",
+					"raw": "https://api.marktube.tv/v1/me",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -50,13 +50,13 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/me",
+			"name": "https://api.marktube.tv/v1/me",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6",
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93",
 						"type": "text"
 					}
 				],
@@ -65,12 +65,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/me",
+					"raw": "https://api.marktube.tv/v1/me",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -82,13 +82,13 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/me",
+			"name": "https://api.marktube.tv/v1/me",
 			"request": {
 				"method": "PATCH",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6",
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93",
 						"type": "text"
 					},
 					{
@@ -114,12 +114,12 @@
 					]
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/me",
+					"raw": "https://api.marktube.tv/v1/me",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -131,30 +131,30 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/me",
+			"name": "https://api.marktube.tv/v1/me",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6",
-						"type": "text"
+						"type": "text",
+						"value": "Bearer be4dbee9-1521-4a83-9080-912dd352e654"
 					},
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"type": "text"
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
 					}
 				],
 				"body": {},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/me",
+					"raw": "https://api.marktube.tv/v1/me",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -166,14 +166,14 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/book",
+			"name": "https://api.marktube.tv/v1/book",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6"
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93"
 					}
 				],
 				"body": {
@@ -181,12 +181,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/book",
+					"raw": "https://api.marktube.tv/v1/book",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -198,14 +198,14 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/book",
+			"name": "https://api.marktube.tv/v1/book",
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6"
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93"
 					},
 					{
 						"key": "Content-Type",
@@ -240,12 +240,12 @@
 					]
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/book",
+					"raw": "https://api.marktube.tv/v1/book",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -257,14 +257,14 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/book/:bookId",
+			"name": "https://api.marktube.tv/v1/book/:bookId",
 			"request": {
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6"
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93"
 					},
 					{
 						"key": "Content-Type",
@@ -278,12 +278,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/book/2",
+					"raw": "https://api.marktube.tv/v1/book/2",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -296,14 +296,14 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/book/:bookId",
+			"name": "https://api.marktube.tv/v1/book/:bookId",
 			"request": {
 				"method": "PATCH",
 				"header": [
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6"
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93"
 					},
 					{
 						"key": "Content-Type",
@@ -338,12 +338,12 @@
 					]
 				},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/book/2",
+					"raw": "https://api.marktube.tv/v1/book/2",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",
@@ -356,14 +356,14 @@
 			"response": []
 		},
 		{
-			"name": "https://api.ts-korea.org/v1/book/:bookId",
+			"name": "https://api.marktube.tv/v1/book/:bookId",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "Bearer c43c99c6-c394-4f44-b2ca-dc4b034daab6"
+						"value": "Bearer 3fce0b2f-5ab5-4971-b532-a4a423fdcc93"
 					},
 					{
 						"key": "Content-Type",
@@ -374,12 +374,12 @@
 				],
 				"body": {},
 				"url": {
-					"raw": "https://api.ts-korea.org/v1/book/6",
+					"raw": "https://api.marktube.tv/v1/book/6",
 					"protocol": "https",
 					"host": [
 						"api",
-						"ts-korea",
-						"org"
+						"marktube",
+						"tv"
 					],
 					"path": [
 						"v1",

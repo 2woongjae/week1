@@ -5,7 +5,7 @@ function getToken() {
 function getUserByToken(token) {
   return new Promise(resolve => {
     axios
-      .get('https://api.ts-korea.org/v1/me', {
+      .get('https://api.marktube.tv/v1/me', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -26,7 +26,7 @@ function logout() {
     return;
   }
   axios
-    .delete('https://api.ts-korea.org/v1/me', {
+    .delete('https://api.marktube.tv/v1/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +49,7 @@ function getBook(bookId) {
       return resolve(null);
     }
     axios
-      .get(`https://api.ts-korea.org/v1/book/${bookId}`, {
+      .get(`https://api.marktube.tv/v1/book/${bookId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,7 +71,7 @@ function deleteBook(bookId) {
       return resolve();
     }
     axios
-      .delete(`https://api.ts-korea.org/v1/book/${bookId}`, {
+      .delete(`https://api.marktube.tv/v1/book/${bookId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -104,7 +104,7 @@ function updateBook(bookId) {
     }
     axios
       .patch(
-        `https://api.ts-korea.org/v1/book/${bookId}`,
+        `https://api.marktube.tv/v1/book/${bookId}`,
         {
           title,
           message,
