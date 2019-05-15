@@ -14,7 +14,6 @@ function getUserByToken(token) {
         return resolve(res.data);
       })
       .catch(error => {
-        console.log(error);
         return resolve(null);
       });
   });
@@ -47,11 +46,9 @@ function updateProfile() {
         },
       )
       .then(data => {
-        console.log(data);
         return resolve(true);
       })
       .catch(error => {
-        console.log(error);
         return reject(error);
       });
   });
@@ -83,12 +80,10 @@ function logout() {
       },
     })
     .then(data => {
-      console.log(data);
       localStorage.clear();
       window.location.href = '/login';
     })
     .catch(error => {
-      console.log(error);
       localStorage.clear();
       window.location.href = '/login';
     });

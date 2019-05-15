@@ -14,7 +14,6 @@ function getUserByToken(token) {
         return resolve(res.data);
       })
       .catch(error => {
-        console.log(error);
         return resolve(null);
       });
   });
@@ -32,7 +31,6 @@ function getBooks(token) {
         return resolve(res.data);
       })
       .catch(error => {
-        console.log(error);
         return resolve(null);
       });
   });
@@ -51,12 +49,10 @@ function logout() {
       },
     })
     .then(data => {
-      console.log(data);
       localStorage.clear();
       window.location.href = '/login';
     })
     .catch(error => {
-      console.log(error);
       localStorage.clear();
       window.location.href = '/login';
     });
@@ -76,11 +72,9 @@ function deleteBook(bookId) {
         },
       })
       .then(data => {
-        console.log(data);
         return resolve(true);
       })
       .catch(error => {
-        console.log(error);
         return reject(error);
       });
   });
@@ -122,15 +116,12 @@ function main() {
       if (user === null) {
         location = '/login';
       }
-      console.log(1);
       return getBooks(token);
     })
     .then(books => {
       if (books === null) {
-        console.log('books is null');
         return;
       }
-      console.log(books);
       const listElement = document.querySelector('#list');
       for (let i = 0; i < books.length; i++) {
         const book = books[i];
@@ -144,12 +135,9 @@ function main() {
         deleteButtonElement.addEventListener('click', () => {
           deleteBook(book.bookId)
             .then(data => {
-              console.log(data);
               location.reload();
             })
-            .catch(error => {
-              console.log(error);
-            });
+            .catch(error => {});
         });
         bookElement.append(deleteButtonElement);
         listElement.append(bookElement);

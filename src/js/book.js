@@ -14,7 +14,6 @@ function getUserByToken(token) {
         return resolve(res.data);
       })
       .catch(error => {
-        console.log(error);
         return resolve(null);
       });
   });
@@ -33,12 +32,10 @@ function logout() {
       },
     })
     .then(data => {
-      console.log(data);
       localStorage.clear();
       window.location.href = '/login';
     })
     .catch(error => {
-      console.log(error);
       localStorage.clear();
       window.location.href = '/login';
     });
@@ -61,7 +58,6 @@ function getBook(bookId) {
         return resolve(res.data);
       })
       .catch(error => {
-        console.log(error);
         return resolve(null);
       });
   });
@@ -81,11 +77,9 @@ function deleteBook(bookId) {
         },
       })
       .then(data => {
-        console.log(data);
         return resolve(true);
       })
       .catch(error => {
-        console.log(error);
         return reject(error);
       });
   });
@@ -142,12 +136,9 @@ function renderBook(book) {
   deleteButtonElement.addEventListener('click', () => {
     deleteBook(book.bookId)
       .then(data => {
-        console.log(data);
         location = '/';
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(error => {});
   });
   detailElement.append(deleteButtonElement);
 
@@ -181,7 +172,6 @@ function main() {
       return getBook(bookId);
     })
     .then(book => {
-      console.log(book);
       renderBook(book);
     });
 }
