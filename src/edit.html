@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Book Edit</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Book Edit</h1>
+    <div class="nav">
+      <div><button id="btn_add">책 추가하기</button></div>
+      <div><button id="btn_list">목록으로</button></div>
+      <div><button id="btn_logout">로그아웃</button></div>
+    </div>
+    <div id="edit">
+      <p><input type="text" id="title" /></p>
+      <p><input type="text" id="message" /></p>
+      <p><input type="text" id="author" /></p>
+      <p><input type="text" id="url" /></p>
+      <p>
+        <button id="btn_save">
+          Save
+        </button>
+      </p>
+      <p>
+        <button id="btn_cancel">
+          Cancel
+        </button>
+      </p>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/edit.js"></script>
+  </body>
+</html>
