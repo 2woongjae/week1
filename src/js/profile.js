@@ -11,66 +11,19 @@ function getUserByToken(token) {
         },
       })
       .then(res => {
-        return resolve(res.data);
+        resolve(res.data);
       })
       .catch(error => {
-        return resolve(null);
+        console.log('getUserByToken error', error);
+        resolve(null);
       });
-  });
-}
-
-function updateProfile() {
-  const githubIdElement = document.querySelector('#githubId');
-  const emailElement = document.querySelector('#email');
-
-  const githubId = githubIdElement.value;
-  const email = emailElement.value;
-
-  return new Promise((resolve, reject) => {
-    const token = getToken();
-    if (token === null) {
-      location = '/login';
-      return resolve();
-    }
-    axios
-      .patch(
-        `https://api.marktube.tv/v1/me`,
-        {
-          githubId,
-          email,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      .then(data => {
-        return resolve(true);
-      })
-      .catch(error => {
-        return reject(error);
-      });
-  });
-}
-
-function render(user) {
-  const githubIdElement = document.querySelector('#githubId');
-  githubIdElement.value = user.githubId;
-
-  const emailElement = document.querySelector('#email');
-  emailElement.value = user.email;
-
-  const saveButtonElement = document.querySelector('#btn_save');
-  saveButtonElement.addEventListener('click', () => {
-    updateProfile();
   });
 }
 
 function logout() {
   const token = getToken();
   if (token === null) {
-    location = '/login';
+    location.href = '/login';
     return;
   }
   axios
@@ -79,14 +32,40 @@ function logout() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(data => {
-      localStorage.clear();
-      window.location.href = '/login';
-    })
     .catch(error => {
+      console.log('logout error', error);
+    })
+    .finally(() => {
       localStorage.clear();
-      window.location.href = '/login';
+      location.href = '/login';
     });
+}
+
+function update() {
+  const nameElement = document.querySelector('#name');
+  const emailElement = document.querySelector('#email');
+
+  const name = nameElement.value;
+  const email = emailElement.value;
+
+  const token = getToken();
+  if (token === null) {
+    location.href = '/login';
+    return;
+  }
+
+  return axios.patch(
+    `https://api.marktube.tv/v1/me`,
+    {
+      name,
+      email,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
 }
 
 function bindLogoutButton() {
@@ -97,35 +76,57 @@ function bindLogoutButton() {
 function bindAddButton() {
   const btnAdd = document.querySelector('#btn_add');
   btnAdd.addEventListener('click', () => {
-    location = '/add';
+    location.href = '/add';
   });
 }
 
 function bindListButton() {
   const btnList = document.querySelector('#btn_list');
   btnList.addEventListener('click', () => {
-    location = '/';
+    location.href = '/';
   });
 }
 
-function main() {
+function render(user) {
+  const nameElement = document.querySelector('#name');
+  nameElement.value = user.name;
+
+  const emailElement = document.querySelector('#email');
+  emailElement.value = user.email;
+
+  const saveButtonElement = document.querySelector('#btn_save');
+  saveButtonElement.addEventListener('click', async () => {
+    try {
+      await update();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+}
+
+async function main() {
+  // 버튼에 이벤트 연결
   bindLogoutButton();
   bindAddButton();
   bindListButton();
 
+  // 토큰 체크
   const token = getToken();
-
   if (token === null) {
+    location.href = '/login';
+    return;
+  }
+
+  // 토큰으로 서버에서 나의 정보 받아오기
+  const user = await getUserByToken(token);
+  if (user === null) {
+    localStorage.clear();
     location = '/login';
     return;
   }
 
-  getUserByToken(token).then(user => {
-    if (user === null) {
-      location = '/login';
-    }
-    render(user);
-  });
+  // 받아온 나의 정보를 그리기
+  render(user);
 }
 
 document.addEventListener('DOMContentLoaded', main);

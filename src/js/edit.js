@@ -11,10 +11,11 @@ function getUserByToken(token) {
         },
       })
       .then(res => {
-        return resolve(res.data);
+        resolve(res.data);
       })
       .catch(error => {
-        return resolve(null);
+        console.log('getUserByToken error', error);
+        resolve(null);
       });
   });
 }
@@ -22,7 +23,7 @@ function getUserByToken(token) {
 function logout() {
   const token = getToken();
   if (token === null) {
-    location = '/login';
+    location.href = '/login';
     return;
   }
   axios
@@ -31,23 +32,22 @@ function logout() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(data => {
-      localStorage.clear();
-      window.location.href = '/login';
-    })
     .catch(error => {
+      console.log('logout error', error);
+    })
+    .finally(() => {
       localStorage.clear();
-      window.location.href = '/login';
+      location.href = '/login';
     });
 }
 
 function getBook(bookId) {
+  const token = getToken();
+  if (token === null) {
+    location.href = '/login';
+    return;
+  }
   return new Promise(resolve => {
-    const token = getToken();
-    if (token === null) {
-      location = '/login';
-      return resolve(null);
-    }
     axios
       .get(`https://api.marktube.tv/v1/book/${bookId}`, {
         headers: {
@@ -55,33 +55,25 @@ function getBook(bookId) {
         },
       })
       .then(res => {
-        return resolve(res.data);
+        resolve(res.data);
       })
       .catch(error => {
-        return resolve(null);
+        console.log('getBook error', error);
+        resolve(null);
       });
   });
 }
 
 function deleteBook(bookId) {
-  return new Promise((resolve, reject) => {
-    const token = getToken();
-    if (token === null) {
-      location = '/login';
-      return resolve();
-    }
-    axios
-      .delete(`https://api.marktube.tv/v1/book/${bookId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(data => {
-        return resolve(true);
-      })
-      .catch(error => {
-        return reject(error);
-      });
+  const token = getToken();
+  if (token === null) {
+    location.href = '/login';
+    return;
+  }
+  return axios.delete(`https://api.marktube.tv/v1/book/${bookId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
 }
 
@@ -96,34 +88,26 @@ function updateBook(bookId) {
   const author = authorElement.value;
   const url = urlElement.value;
 
-  return new Promise((resolve, reject) => {
-    const token = getToken();
-    if (token === null) {
-      location = '/login';
-      return resolve();
-    }
-    axios
-      .patch(
-        `https://api.marktube.tv/v1/book/${bookId}`,
-        {
-          title,
-          message,
-          author,
-          url,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      )
-      .then(data => {
-        return resolve(true);
-      })
-      .catch(error => {
-        return reject(error);
-      });
-  });
+  const token = getToken();
+  if (token === null) {
+    location = '/login';
+    return resolve();
+  }
+
+  return axios.patch(
+    `https://api.marktube.tv/v1/book/${bookId}`,
+    {
+      title,
+      message,
+      author,
+      url,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
 }
 
 function bindLogoutButton() {
@@ -134,18 +118,18 @@ function bindLogoutButton() {
 function bindAddButton() {
   const btnAdd = document.querySelector('#btn_add');
   btnAdd.addEventListener('click', () => {
-    location = '/add';
+    location.href = '/add';
   });
 }
 
 function bindListButton() {
   const btnList = document.querySelector('#btn_list');
   btnList.addEventListener('click', () => {
-    location = '/';
+    location.href = '/';
   });
 }
 
-function renderBook(book) {
+function render(book) {
   const titleElement = document.querySelector('#title');
   titleElement.value = book.title;
 
@@ -161,40 +145,49 @@ function renderBook(book) {
   const saveButtonElement = document.querySelector('#btn_save');
   saveButtonElement.addEventListener('click', () => {
     updateBook(book.bookId).then(() => {
-      location = `book?id=${book.bookId}`;
+      location.href = `book?id=${book.bookId}`;
     });
   });
 
   const cancelButtonElement = document.querySelector('#btn_cancel');
   cancelButtonElement.addEventListener('click', () => {
-    location = `book?id=${book.bookId}`;
+    location.href = `book?id=${book.bookId}`;
   });
 }
 
-function main() {
+async function main() {
+  // 버튼에 이벤트 연결
   bindAddButton();
   bindListButton();
   bindLogoutButton();
 
-  const token = getToken();
+  // 브라우저에서 id 가져오기
+  const bookId = new URL(location.href).searchParams.get('id');
 
+  // 토큰 체크
+  const token = getToken();
   if (token === null) {
+    location.href = '/login';
+    return;
+  }
+
+  // 토큰으로 서버에서 나의 정보 받아오기
+  const user = await getUserByToken(token);
+  if (user === null) {
+    localStorage.clear();
     location = '/login';
     return;
   }
 
-  const bookId = new URL(location.href).searchParams.get('id');
+  // 책을 서버에서 받아오기
+  const book = await getBook(bookId);
+  if (book === null) {
+    alert('서버에서 책 가져오기 실패');
+    return;
+  }
 
-  getUserByToken(token)
-    .then(user => {
-      if (user === null) {
-        location = '/login';
-      }
-      return getBook(bookId);
-    })
-    .then(book => {
-      renderBook(book);
-    });
+  // 받아온 책을 그리기
+  render(book);
 }
 
 document.addEventListener('DOMContentLoaded', main);

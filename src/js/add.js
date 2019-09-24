@@ -11,10 +11,11 @@ function getUserByToken(token) {
         },
       })
       .then(res => {
-        return resolve(res.data);
+        resolve(res.data);
       })
       .catch(error => {
-        return resolve(null);
+        console.log('getUserByToken error', error);
+        resolve(null);
       });
   });
 }
@@ -22,7 +23,7 @@ function getUserByToken(token) {
 function logout() {
   const token = getToken();
   if (token === null) {
-    location = '/login';
+    location.href = '/login';
     return;
   }
   axios
@@ -31,13 +32,12 @@ function logout() {
         Authorization: `Bearer ${token}`,
       },
     })
-    .then(data => {
-      localStorage.clear();
-      window.location.href = '/login';
-    })
     .catch(error => {
+      console.log('logout error', error);
+    })
+    .finally(() => {
       localStorage.clear();
-      window.location.href = '/login';
+      location.href = '/login';
     });
 }
 
@@ -54,9 +54,10 @@ function save() {
 
   const token = getToken();
   if (token === null) {
-    location = '/login';
+    location.href = '/login';
     return;
   }
+
   axios
     .post(
       'https://api.marktube.tv/v1/book',
@@ -72,10 +73,13 @@ function save() {
         },
       },
     )
-    .then(data => {
-      window.location.href = '/';
+    .then(() => {
+      location.href = '/';
     })
-    .catch(error => {});
+    .catch(error => {
+      console.log('save error', error);
+      alert('책 추가 실패');
+    });
 }
 
 function bindLogoutButton() {
@@ -86,7 +90,7 @@ function bindLogoutButton() {
 function bindMoveListButton() {
   const btnMoveList = document.querySelector('#btn_moveList');
   btnMoveList.addEventListener('click', () => {
-    location = '/';
+    location.href = '/';
   });
 }
 
@@ -95,23 +99,26 @@ function bindSaveButton() {
   btnSave.addEventListener('click', save);
 }
 
-function main() {
+async function main() {
+  // 버튼에 이벤트 연결
   bindMoveListButton();
   bindLogoutButton();
   bindSaveButton();
 
+  // 토큰 체크
   const token = getToken();
-
   if (token === null) {
-    location = '/login';
+    location.href = '/login';
     return;
   }
 
-  getUserByToken(token).then(user => {
-    if (user === null) {
-      location = '/login';
-    }
-  });
+  // 토큰으로 서버에서 나의 정보 받아오기
+  const user = await getUserByToken(token);
+  if (user === null) {
+    localStorage.clear();
+    location.href = '/login';
+    return;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', main);

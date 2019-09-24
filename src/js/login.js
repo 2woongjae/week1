@@ -2,43 +2,16 @@ function getToken() {
   return localStorage.getItem('token');
 }
 
-function getIsLogin() {
-  return new Promise(resolve => {
-    const token = getToken();
-    if (token === null) {
-      return resolve(false);
-    }
-    axios
-      .get('https://api.marktube.tv/v1/me', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then(res => {
-        return resolve(true);
-      })
-      .catch(error => {
-        if (data) {
-          const state = data.error;
-          if (state === 'INVALID_TOKEN') {
-            alert('토큰이 유효하지 않습니다.');
-          }
-        }
-        return resolve(false);
-      });
-  });
-}
-
 function login() {
-  const githubIdElement = document.querySelector('#githubId');
+  const emailElement = document.querySelector('#email');
   const passwordElement = document.querySelector('#password');
 
-  const githubId = githubIdElement.value;
+  const email = emailElement.value;
   const password = passwordElement.value;
 
   axios
     .post('https://api.marktube.tv/v1/me', {
-      githubId,
+      email,
       password,
     })
     .then(res => {
@@ -47,7 +20,7 @@ function login() {
         return;
       }
       localStorage.setItem('token', token);
-      location = '/';
+      location.href = '/';
     })
     .catch(error => {
       const data = error.response.data;
@@ -67,14 +40,16 @@ function bindLoginButton() {
   btnLogin.addEventListener('click', login);
 }
 
-function main() {
+async function main() {
+  // 버튼에 이벤트 연결
   bindLoginButton();
 
-  getIsLogin().then(isLogin => {
-    if (isLogin) {
-      location = '/';
-    }
-  });
+  // 토큰 체크
+  const token = getToken();
+  if (token !== null) {
+    location.href = '/';
+    return;
+  }
 }
 
 document.addEventListener('DOMContentLoaded', main);

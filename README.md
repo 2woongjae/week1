@@ -31,6 +31,7 @@ HTML 과 JavaScript 로 된 페이지를 제공합니다. 로그인 페이지, �
 - [TypeScript Compiler Options](https://www.notion.so/Compiler-Options-fde8ee3f49604c70adffdea1d6c5fd90)
 - [점진적 타이핑](https://ahnheejong.gitbook.io/ts-for-jsdev/03-basic-grammar/intro)
 - [티입스크립트 기초 문법 (타입 표기, 인터페이스, 클래스)](https://www.notion.so/TypeScript-Cookbook-727820ac0d4544498ebe732e940816f4)
+- [티입스크립트 기초 강의](https://www.youtube.com/playlist?list=PLV6pYUAZ-ZoFwOspuVHBvmhQRalqvj7Jf)
 
 ### 필수
 
