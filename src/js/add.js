@@ -44,8 +44,8 @@ function logout() {
 function save() {
   const titleElement = document.querySelector('#title');
   const messageElement = document.querySelector('#message');
-  const authorElement = document.querySelector('#message');
-  const urlElement = document.querySelector('#message');
+  const authorElement = document.querySelector('#author');
+  const urlElement = document.querySelector('#url');
 
   const title = titleElement.value;
   const message = messageElement.value;
